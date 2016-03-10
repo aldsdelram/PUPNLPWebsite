@@ -17,11 +17,6 @@ class Users_model extends CI_Model {
         return $query->row_array();
 	}
 
-    public function find_info($user_id)
-	{
-        $query = $this->db->get_where('user_infos', array('user_id' => $user_id));
-        return $query->row_array();
-	}
 
 	public function insert($data, $other_info){
 		$query1 = $this->db->insert('users', $data);
@@ -36,10 +31,5 @@ class Users_model extends CI_Model {
 		$query3 = $this->db->insert('user_validity', $validity);
 
 		return array("user" => $query1, "user_info"=>$query2, "validity" => $query3);
-	}
-
-	public function update($updated_data, $user_id){
-        $this->db->where('user_id', $user_id);
-        $this->db->update('user_infos', $updated_data);
 	}
 }

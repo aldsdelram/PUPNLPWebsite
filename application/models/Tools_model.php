@@ -1,9 +1,20 @@
 <?php
 class Tools_model extends CI_Model {
- //    public function __construct()
- //    {
- //    	$this->load->database();
- //    }
+    public function __construct()
+    {
+    	$this->load->database();
+    }
+
+    public function all(){
+        return $this->db->get('tools');
+    }
+
+    public function find($id)
+	{
+        $query = $this->db->get_where('tools', array('id' => $id));
+        return $query->row_array();
+	}
+
 
  //    public function find($username)
 	// {

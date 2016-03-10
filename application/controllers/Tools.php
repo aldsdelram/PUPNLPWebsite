@@ -1,48 +1,27 @@
 <?php
 class Tools extends CI_Controller {
+
 	public function __construct()
     {
             parent::__construct();
             $this->load->model('Tools_model');
-    		$this->load->helper('tool_helper');
+    		// $this->load->helper('user_helper');
     }
+
 	public function index(){
-
-
-	}
-
-	public function add(){
-
-		$data;
-
-		if(isset($_POST['btnUpload']))
-		{
-			$input = array(
-			"title" => $_POST['title'],
-			"abstract" => $_POST['abstract'],
-			"author" => $_POST['author'],
-			"year" => $_POST['year'],
-			"file" => $_POST['fileToUpload']
-			);
-
-
-			$data["error"] = verify_data($input);
-
-			if($data["error"]["count"]==0){
-
-			}
-			else{
-				echo "ERRORRRRRRRR!!!!!";
-			}
-
-		}
-
+		$data['tools'] = $this->Tools_model->all();
 
 		$this->load->view('templates/header');
-		if(empty($data))
-	        $this->load->view('tools/new');
-	    else
-	    	$this->load->view('tools/new', $data);
-        $this->load->view('templates/footer');
+		$this->load->view('tools/viewtools', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function getinfo($id){
+		$data['info'] = $this->Tools_model->find($id);
+		header('Content-Type: application/json');
+		echo json_encode($data['info']);
+		/*$this->load->view('templates/header');
+		$this->load->view('tools/viewtools', $data);
+		$this->load->view('templates/footer');*/
 	}
 }
