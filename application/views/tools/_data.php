@@ -61,10 +61,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-	    $("a#toollist").click(function(){
+	    $("#toollist").click(function(){
 	    	$id = $(this).attr('data-id');
 	    	$theURL = 'tools/'+$id+'/info';
-	    	$.ajax({url: $theURL, 
+	        $.ajax({url: $theURL, 
 	        	type: "GET",
 				dataType: "json",
 
