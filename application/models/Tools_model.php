@@ -67,7 +67,7 @@ class Tools_model extends CI_Model {
 	public function add_download($download){
 		$query1 = $this->db->insert('downloads', $download);
 
-		return array("download" => $query1);
+		// return array("download" => $query1);
 	}
 
 	public function updatetool($updatedtool, $id)

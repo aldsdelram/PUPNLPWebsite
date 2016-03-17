@@ -111,22 +111,21 @@ class Tools extends CI_Controller {
 		session_start();
 		$this->load->library('zip');
 
+
+		$download["tool_id"] = $id;
+		$download["downloaded_by"] = $_SESSION['id'];
+		$download["created_at"] = $date = date('Y/m/d H:i:s');
+		$this->Tools_model->add_download($download);
+
 		$data["page"] = "download";
 		$data['version'] = $this->Tools_model->find_version($id);
 		$path = $data['version']['file'];
 		$this->zip->read_file('../public/tools/'.$path); 
 		$this->zip->download('../public/tools/'.$data['version']['file']);
-	
-
-		$download["tool_id"] = $id;
-		$download["downloaded_by"] = $_SESSION['id'];
-		$download["created_at"] = $date = date('Y/m/d H:i:s');
-		$tools = $this->Tools_model->add_download($download);
-
 		
-		$this->load->view('templates/header');
-		$this->load->view('tools/download', $data);
-		$this->load->view('templates/footer');
+		// $this->load->view('templates/header');
+		// $this->load->view('tools/download', $data);
+		// $this->load->view('templates/footer');
 	}
 
 
