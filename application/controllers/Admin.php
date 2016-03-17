@@ -37,4 +37,34 @@ class Admin extends CI_Controller {
 		
 		header('Location: ../../approve_users');
 	}
+
+	public function requests(){
+		$data['page'] = "requests";
+		$data['newline'] = "<br/>";
+
+		$data['result'] = $this->db->get_where('download_requests', array('accepted_by' => 0));
+
+        $this->load->view('templates/header');
+        $this->load->view('admin/requests', $data);
+        $this->load->view('templates/footer');
+	}
+
+	public function approve_request($id,$option){
+
+		if($option == 1)
+		{
+			$data = array(
+               'accepted_by' => $option,
+            );
+
+			$this->db->where('id', $id);
+			$this->db->update('download_requests', $data);
+		}
+		else
+		{
+			$this->db->delete('download_requests', array('id' => $id)); 
+		}
+		
+		header('Location: ../../requests');
+	}	
 }

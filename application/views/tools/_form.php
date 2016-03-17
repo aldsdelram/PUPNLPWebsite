@@ -4,7 +4,12 @@ $newline = '<br />';
 
 echo '<form method="post" onsubmit="" class="col-md-10 col-md-offset-1 col-xs-12">'."\n";
 
-echo '<h1> Add Tools </h1>';
+if($page == 'upload')
+	echo '<h1> Add Tool </h1>';
+else if($page == 'update'){
+	echo '<h1> Update Tool </h1>';
+}
+
 
 echo "<label class='form-label'> Title </label>\n";
 	echo "<input class='form-control' name='title' type='text' placeholder='Title' value='".(empty($_POST["title"])?"":$_POST["title"])."'/>\n";

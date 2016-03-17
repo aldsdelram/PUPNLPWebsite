@@ -83,8 +83,16 @@ class Users extends CI_Controller {
         $this->load->view('users/login', $data);
         $this->load->view('templates/footer');
 	}
+	public function home(){
+		$data['page'] = "home";
+		$data['newline'] = "<br/>";
 
-		public function update(){
+		$this->load->view('templates/header');
+        $this->load->view('home/index', $data);
+        $this->load->view('templates/footer');
+	}
+
+	public function update(){
 		$data['page'] = "update";
 		$data['newline'] = "<br/>";
 

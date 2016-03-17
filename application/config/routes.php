@@ -56,7 +56,8 @@ $route['tools/new'] = 'Tools/add';
 $route['register'] = 'Users/register';
 $route['login'] = 'Users/login';
 $route['user/(:num)/update'] = "Users/update/$1";
-$route['home'] = 'Home/index';
+$route['home'] = 'Users/home';
+$route['update'] = 'Users/update';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['tools/(:num)/info'] = 'Tools/getinfo/$1';
@@ -67,4 +68,7 @@ $route['tools/(:num)/downloadrequest'] = 'Tools/downloadrequest/$1';
 $route['user/(:num)/update'] = "Users/update/$1";
 $route['approve/(:num)/(:num)'] = 'Admin/approve/$1/$2';
 $route['approve_users'] = 'Admin/approve_users';
+$route['requests'] = 'Admin/requests';
+$route['approve_request/(:num)/(:num)'] = 'Admin/approve_request/$1/$2';
+$route['report'] = 'ReportGenerator/index';
  

@@ -6,6 +6,7 @@ class Tools extends CI_Controller {
             parent::__construct();
             $this->load->model('Tools_model');
     		$this->load->helper('tool_helper');
+    		$this->load->library('ftp');
     }
 
 	public function index(){
@@ -38,7 +39,7 @@ class Tools extends CI_Controller {
 			"abstract" => $_POST['abstract'],
 			"author" => $_POST['author'],
 			"year" => $_POST['year'],
-			"file" => $_POST['fileToUpload'],
+			"file" => $_FILES['fileToUpload']['name'],
 			"version" => $_POST['version']
 			);	
 
@@ -57,6 +58,19 @@ class Tools extends CI_Controller {
 
 			$this->Tools_model->updatetool($updatedtool, $id);
 			$this->Tools_model->updatetoolver($updatedtoolver, $id);
+
+			$config['hostname'] = 'localhost';
+			$config['username'] = 'gega_16948146';
+			$config['password'] = 'NLPGroupPUP';
+			$config['port']     = 21;
+			$config['debug'] = TRUE;
+
+			$this->ftp->connect($config);
+
+			$this->ftp->upload($_FILES['fileToUpload']['tmp_name'], '/public/tools/'.$_FILES['fileToUpload']['name'], 'auto');
+
+			$this->ftp->close();
+
 			header('Location: edit');
 			}
 
@@ -100,8 +114,8 @@ class Tools extends CI_Controller {
 		$data["page"] = "download";
 		$data['version'] = $this->Tools_model->find_version($id);
 		$path = $data['version']['file'];
-		$this->zip->read_file($path); 
-		$this->zip->download($data['version']['file']);
+		$this->zip->read_file('../public/tools/'.$path); 
+		$this->zip->download('../public/tools/'.$data['version']['file']);
 	
 
 		$download["tool_id"] = $id;
@@ -149,7 +163,7 @@ class Tools extends CI_Controller {
 			"abstract" => $_POST['abstract'],
 			"author" => $_POST['author'],
 			"year" => $_POST['year'],
-			"file" => $_POST['fileToUpload'],
+			"file" => $_FILES['fileToUpload']["name"],
 			"version" => $_POST['version']
 			);
 
@@ -167,6 +181,18 @@ class Tools extends CI_Controller {
 				$otherinfo["file"] = $input["file"];
 
 				$user = $this->Tools_model->insert($toolsdata, $otherinfo);
+
+				$config['hostname'] = 'localhost';
+				$config['username'] = 'gega_16948146';
+				$config['password'] = 'NLPGroupPUP';
+				$config['port']     = 21;
+				$config['debug'] = TRUE;
+
+				$this->ftp->connect($config);
+
+				$this->ftp->upload($_FILES['fileToUpload']['tmp_name'], '/public/tools/'.$_FILES['fileToUpload']['name'], 'auto');
+
+				$this->ftp->close(); 
 				header('Location: new');
 
 			}
