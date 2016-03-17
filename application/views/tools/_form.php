@@ -2,7 +2,7 @@
 
 $newline = '<br />';
 
-echo '<form method="post" onsubmit="" class="col-md-10 col-md-offset-1 col-xs-12">'."\n";
+echo '<form method="post" enctype="multipart/form-data" onsubmit="" class="col-md-10 col-md-offset-1 col-xs-12">'."\n";
 
 echo '<h1> Add Tools </h1>';
 
