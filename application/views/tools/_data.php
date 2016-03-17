@@ -61,7 +61,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-	    $("#toollist").click(function(){
+	    $("a#toollist").click(function(){
 	    	$id = $(this).attr('data-id');
 	    	$theURL = 'tools/'+$id+'/info';
 	        $.ajax({url: $theURL, 
