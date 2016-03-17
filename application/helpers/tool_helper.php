@@ -4,7 +4,7 @@
 
 		$error["count"] = 0;
 
-		$users = get_instance();
+		$tools = get_instance();
 
 		if(empty($data["title"])){
 			$message.="<li>Title is a must</li>";
@@ -16,14 +16,19 @@
 			$error["count"]++;
 		}
 
-		/*if($name->Tools_model->find($data["name"])) {
+		if($tools->Tools_model->find($data["title"])) {
 			$error["count"]++;
 			$message.="<li>Title has been already taken</li>";
-		}*/
+		}
 
 		if(empty($data["year"])){
 			$error["count"]++;
 			$message.="<li>Year is a must</li>";
+		}
+
+		if(empty($data["year"])){
+			$error["count"]++;
+			$message.="<li>Version is a must</li>";
 		}
 
 		if(empty($data["file"])){

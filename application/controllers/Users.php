@@ -69,6 +69,7 @@ class Users extends CI_Controller {
 				if(verify($password, $user_info["password"], $user_info["salt"])){
 					session_start();
 					$_SESSION['username'] = $username;
+					$_SESSION['type'] = $user_info['type'];
 					header('Location: home');
 				}
 				else echo "false";
@@ -82,15 +83,51 @@ class Users extends CI_Controller {
         $this->load->view('templates/footer');
 	}
 
-	public function update($id){
+		public function update(){
 		$data['page'] = "update";
 		$data['newline'] = "<br/>";
 
-		$data['id'] = $id;
+		// temp id and username
+		$user_id = 7;
+		$username = "loremipsum";
+		$user = $this->Users_model->find($username);
+		$result = $this->Users_model->find_info($user_id);
+
+		if(isset($_POST['btnUpdate']))
+		{
+			$input = array(
+		    "firstname" => $_POST['firstname'],
+		    "middlename" => $_POST['middlename'],
+		    "lastname" => $_POST['lastname'],
+		    "email" => $_POST['email'],
+		    "gender" => isset($_POST['gender'])?$_POST['gender']:"",
+		    "occupation" => $_POST['occupation'],
+		    "otherinfo" => $_POST['otherinfo']
+			);
+
+			$updated_data["first_name"] = $input["firstname"];
+			$updated_data["middle_name"] = $input["middlename"];
+			$updated_data["last_name"] = $input["lastname"];
+			$updated_data["email"] = $input["email"];
+			$updated_data["gender"] = $input["gender"];
+			$updated_data["occupation"] = $input["occupation"];
+			$updated_data["about"] = $input["otherinfo"];
+
+			$this->Users_model->update($updated_data, $user_id);
+			header('Location: update');
+		}
+
+		$_POST['username'] = $user["username"];
+		$_POST['firstname'] = $result["first_name"];
+		$_POST['middlename'] = $result["middle_name"];
+		$_POST['lastname'] = $result["last_name"];
+		$_POST['email'] = $result["email"];
+		$_POST['gender'] = $result["gender"];
+		$_POST['occupation'] = $result["occupation"];
+		$_POST['otherinfo'] = $result["about"];
 
         $this->load->view('templates/header');
         $this->load->view('users/update', $data);
         $this->load->view('templates/footer');
-		
 	}
 }

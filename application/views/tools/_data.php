@@ -27,7 +27,10 @@
 		echo '<h2>TOOL INFORMATION</h2>';
 			echo"<h3>";
 			echo '<span class="tool_title">TITLE:</span>&nbsp;';
-			echo '<span id="tool_title"><span>';
+			echo '<span id="tool_title"></span>';
+			if(!empty($_SESSION['type']))
+				if($_SESSION['type'] == "admin")
+					echo '<small id="updateLink"></small>';
 			echo "</h3>";
 
 			echo"<h3>";
@@ -58,10 +61,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-	    $("#toollist").click(function(){
+	    $("a#toollist").click(function(){
 	    	$id = $(this).attr('data-id');
 	    	$theURL = 'tools/'+$id+'/info';
-	        $.ajax({url: $theURL, 
+	    	$.ajax({url: $theURL, 
 	        	type: "GET",
 				dataType: "json",
 
@@ -70,7 +73,8 @@
 		            $("#tool_author").text(data.authors);
 		            $("#tool_abstract").text(data.abstract);
 		            $("#tool_year").text(data.year);
-		            $("#tool_version").text("v1.456");
+		            $("#tool_version").text("v1.456");		            
+		            $("#updateLink").html("<a href='tools/"+$id+"/edit'>UPDATE</a>");
 	        }});
 	    });
 	});

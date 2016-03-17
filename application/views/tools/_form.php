@@ -22,6 +22,10 @@ echo "<label class='form-label'> Year </label>\n";
 	echo "<input class='form-control' name='year' type='text' value='".(empty($_POST["year"])?"":$_POST["year"])."'/>\n";
 	echo $newline;
 
+echo "<label class='form-label'> Version </label>\n";
+	echo "<input class='form-control' name='version' type='text' placeholder='v1.0' value='".(empty($_POST["version"])?"":$_POST["version"])."'/>\n";
+	echo $newline;
+
 echo '<p align=left> <input type="file" name="fileToUpload" id="fileToUpload"></php>';
 echo $newline;
 
