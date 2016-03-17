@@ -73,7 +73,8 @@
 		            $("#tool_author").text(data.authors);
 		            $("#tool_abstract").text(data.abstract);
 		            $("#tool_year").text(data.year);
-		            $("#tool_version").text("v1.456");		            
+
+		            $("#tool_version").text(data.version);		            
 		            $("#updateLink").html("<a href='tools/"+$id+"/edit'>UPDATE</a>");
 	        }});
 	    });

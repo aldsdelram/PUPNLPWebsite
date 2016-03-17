@@ -11,7 +11,8 @@ echo "<label class='form-label'> Title </label>\n";
 	echo $newline;
 
 echo "<label> Abstract </label>";
-	echo '<textarea class="form-control" rows="5" name="abstract" placeholder="Place Abstract here..." value="'.(empty($_POST["abstract"])?"":$_POST["abstract"]).'" ></textarea>';
+	echo "<input class='form-control' name='abstract' type='text' value='".(empty($_POST["abstract"])?"":$_POST["abstract"])."'/>\n";
+	// echo '<textarea class="form-control" rows="5" name="abstract" placeholder="Place Abstract here..." value="'.(empty($_POST["abstract"])?"":$_POST["abstract"]).'" ></textarea>';
 	echo $newline;
 
 echo "<label class='form-label'> Author/s </label>\n";
@@ -29,9 +30,19 @@ echo "<label class='form-label'> Version </label>\n";
 echo '<p align=left> <input type="file" name="fileToUpload" id="fileToUpload"></php>';
 echo $newline;
 
-echo "<button type='submit' class='btn btn-primary' name='btnUpload'>UPLOAD</button>";
-echo '&nbsp &nbsp<button type="submit" class="btn btn-default" formaction="welcome" name="btnCancel">Cancel</button>';
-echo $newline; echo $newline;
+if($page == 'upload'){
+		echo '<button type="submit" class="btn btn-primary" name="btnUpload">Upload</button> ';
+	}
+else if($page == 'update'){
+	echo '<button type="submit" class="btn btn-primary" name="btnUpdate">Update</button> ';
+	
+}
+
+echo '<button type="submit" class="btn btn-default" formaction="tools.php" name="btnCancel">Cancel</button> ';
 
 
+
+
+
+// 
 ?>

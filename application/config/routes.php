@@ -60,6 +60,7 @@ $route['home'] = 'Home/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['tools/(:num)/info'] = 'Tools/getinfo/$1';
+$route['tools/(:num)/version'] = 'Tools/getversion/$1';
 $route['tools/(:num)/edit'] = 'Tools/edit/$1';
 $route['user/(:num)/update'] = "Users/update/$1";
 $route['approve/(:num)/(:num)'] = 'Admin/approve/$1/$2';

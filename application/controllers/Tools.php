@@ -10,6 +10,7 @@ class Tools extends CI_Controller {
 
 	public function index(){
 		$data['tools'] = $this->Tools_model->all();
+		$data['tools_version'] = $this->Tools_model->alltoolsver();
 
 		session_start();
 		$this->load->view('templates/header');
@@ -19,23 +20,88 @@ class Tools extends CI_Controller {
 
 
 	public function edit($id){
+
+		$data["page"] = "update";
+		$data;
+		
 		session_start();
 
+
 		$data['tools'] = $this->Tools_model->find($id);
+		$data['tools_version'] = $this->Tools_model->find_version($id);
+
+
+		if(isset($_POST['btnUpdate']))
+		{
+			$input = array(
+			"title" => $_POST['title'],
+			"abstract" => $_POST['abstract'],
+			"author" => $_POST['author'],
+			"year" => $_POST['year'],
+			"file" => $_POST['fileToUpload'],
+			"version" => $_POST['version']
+			);	
+
+			$data["error"] = verify_data($input);
+
+			if($data["error"]["count"]==0){
+
+			$updatedtool["name"] = $input["title"];
+	    	$updatedtool["abstract"] = $input["abstract"];
+	    	$updatedtool["authors"] = $input["author"];
+	    	$updatedtool["year"] = $input["year"];
+
+	    	$updatedtoolver["file"] = $input["file"];
+	    	$updatedtoolver["version"] = $input["version"];
+			
+
+			$this->Tools_model->updatetool($updatedtool, $id);
+			$this->Tools_model->updatetoolver($updatedtoolver, $id);
+			header('Location: edit');
+			}
+
+
+		}
 
 		$_POST['title'] = $data['tools']['name'];
 		$_POST['abstract'] = $data['tools']['abstract'];
+		$_POST['author'] = $data['tools']['authors'];
+		$_POST['year'] = $data['tools']['year'];
+		$_POST['version'] = $data['tools_version']['version'];
+		$_POST['file'] = $data['tools_version']['file'];
+
 
 		$this->load->view('templates/header');
 		$this->load->view('tools/update', $data);
 		$this->load->view('templates/footer');
+	
 	}
+	// public function editversion($id){
+	// 	session_start();
 
+	// 	$data['tools_version'] = $this->Tools_model->find_version($id);
+
+	// 	$_POST['version'] = $data['tools_version']['version'];
+
+	// 	$this->load->view('templates/header');
+	// 	$this->load->view('tools/update', $data);
+	// 	$this->load->view('templates/footer');
+	// }
 
 	public function getinfo($id){
 		$data['info'] = $this->Tools_model->find($id);
+		$data['version'] = $this->Tools_model->find_version($id);
 		header('Content-Type: application/json');
-		echo json_encode($data['info']);
+		echo json_encode($data['info'] + $data['version']);
+		/*$this->load->view('templates/header');
+		$this->load->view('tools/viewtools', $data);
+		$this->load->view('templates/footer');*/
+	}
+
+	public function getversion($id){
+		// $data['info'] = $this->Tools_model->find_version($id);
+		// header('Content-Type: application/json');
+		// echo json_encode($data['version']);
 		/*$this->load->view('templates/header');
 		$this->load->view('tools/viewtools', $data);
 		$this->load->view('templates/footer');*/
@@ -43,6 +109,7 @@ class Tools extends CI_Controller {
 
 	public function add(){
 
+		$data["page"] = "upload";
 		$data;
 
 		if(isset($_POST['btnUpload']))
@@ -84,4 +151,6 @@ class Tools extends CI_Controller {
 	    	$this->load->view('tools/new', $data);
         $this->load->view('templates/footer');
 	}
+
+	
 }

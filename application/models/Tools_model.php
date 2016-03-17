@@ -9,9 +9,21 @@ class Tools_model extends CI_Model {
         return $this->db->get('tools');
     }
 
+    public function alltoolsver(){
+        return $this->db->get('tools_version');
+    }
+
     public function find($id)
 	{
         $query = $this->db->get_where('tools', array('id' => $id));
+
+        return $query->row_array();
+	}
+
+    public function find_version($id)
+	{
+        $query = $this->db->get_where('tools_version', array('tool_id' => $id));
+
         return $query->row_array();
 	}
 
@@ -32,5 +44,24 @@ class Tools_model extends CI_Model {
 
 		return array("tools" => $query1, "tools_version"=>$query2);
 	}
- 
+
+	public function updatetool($updatedtool, $id)
+	{
+		 
+		 $this->db->where('id', $id);
+         $query = $this->db->update('tools', $updatedtool);
+
+         return array("tools"=>$query);
+         
+	}
+
+ 	public function updatetoolver($updatedtoolver, $id)
+	{
+		 
+		 $this->db->where('tool_id', $id);
+         $query = $this->db->update('tools_version', $updatedtoolver);
+
+         return array("tools_version"=>$query);
+	}
+	
 }

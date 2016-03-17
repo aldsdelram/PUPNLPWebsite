@@ -73,7 +73,7 @@ class Users extends CI_Controller {
 					header('Location: home');
 				}
 				else echo "false";
-			}
+				}
 			else
 				echo "Check your password or username";
 		}
