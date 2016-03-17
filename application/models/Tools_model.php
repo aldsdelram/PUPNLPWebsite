@@ -27,6 +27,13 @@ class Tools_model extends CI_Model {
         return $query->row_array();
 	}
 
+	public function find_request($id)
+	{
+        $query = $this->db->get_where('download_requests', array('tool_id' => $id));
+
+        return $query->row_array();
+	}
+
     public function findtitle($title)
 	{
         $query = $this->db->get_where('tools', array('name' => $title));
@@ -45,14 +52,30 @@ class Tools_model extends CI_Model {
 		return array("tools" => $query1, "tools_version"=>$query2);
 	}
 
+	public function add_view($view){
+		$query1 = $this->db->insert('tools_views', $view);
+
+		return array("tools_views" => $query1);
+	}
+
+	public function add_request($download){
+		$query1 = $this->db->insert('download_requests', $download);
+
+		return array("download_requests" => $query1);
+	}
+
+	public function add_download($download){
+		$query1 = $this->db->insert('downloads', $download);
+
+		return array("download" => $query1);
+	}
+
 	public function updatetool($updatedtool, $id)
 	{
-		 
 		 $this->db->where('id', $id);
          $query = $this->db->update('tools', $updatedtool);
 
          return array("tools"=>$query);
-         
 	}
 
  	public function updatetoolver($updatedtoolver, $id)

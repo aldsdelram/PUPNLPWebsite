@@ -1,6 +1,8 @@
 <?php
+
 	
 	echo '<div class="container-fluid">';
+
 
 	echo '<div class="well col-xs-12">'."\n";
 	echo '<form method="post" onsubmit="" class="container">'."\n";
@@ -16,6 +18,7 @@
 
 		echo '<button type="submit" class="btn btn-primary" name="btnLogin">Login</button> ';
 		echo '<button type="submit" class="btn btn-default" formaction="index.php" name="btnCancel">Cancel</button>';
+
 
 	echo '</form>';
 	echo '</div>';

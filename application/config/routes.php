@@ -51,14 +51,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'welcome';
 $route['sample'] = 'welcome/sample';
+$route['tools'] = 'Tools/index';
+$route['tools/new'] = 'Tools/add';
 $route['register'] = 'Users/register';
 $route['login'] = 'Users/login';
 $route['user/(:num)/update'] = "Users/update/$1";
-$route['home'] = 'Users/home';
-$route['update'] = 'Users/update';
-$route['approve_users'] = 'Admin/approve_users';
-$route['approve/(:num)/(:num)'] = 'Admin/approve/$1/$2'; 
-$route['requests'] = 'Admin/requests';
-$route['approve_request/(:num)/(:num)'] = 'Admin/approve_request/$1/$2';
+$route['home'] = 'Home/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['tools/(:num)/info'] = 'Tools/getinfo/$1';
+$route['tools/(:num)/version'] = 'Tools/getversion/$1';
+$route['tools/(:num)/edit'] = 'Tools/edit/$1';
+$route['tools/(:num)/download'] = 'Tools/download/$1';
+$route['tools/(:num)/downloadrequest'] = 'Tools/downloadrequest/$1';
+$route['user/(:num)/update'] = "Users/update/$1";
+$route['approve/(:num)/(:num)'] = 'Admin/approve/$1/$2';
+$route['approve_users'] = 'Admin/approve_users';
+ 

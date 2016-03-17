@@ -68,11 +68,13 @@ class Users extends CI_Controller {
 
 				if(verify($password, $user_info["password"], $user_info["salt"])){
 					session_start();
+					$_SESSION['id'] = $user_info['id'];
 					$_SESSION['username'] = $username;
+					$_SESSION['type'] = $user_info['type'];
 					header('Location: home');
 				}
 				else echo "false";
-			}
+				}
 			else
 				echo "Check your password or username";
 		}
@@ -82,22 +84,13 @@ class Users extends CI_Controller {
         $this->load->view('templates/footer');
 	}
 
-	public function home(){
-		$data['page'] = "home";
-		$data['newline'] = "<br/>";
-
-		$this->load->view('templates/header');
-        $this->load->view('home/index', $data);
-        $this->load->view('templates/footer');
-	}
-
-	public function update(){
+		public function update(){
 		$data['page'] = "update";
 		$data['newline'] = "<br/>";
 
 		// temp id and username
-		$user_id = 2;
-		$username = "aldsdelram";
+		$user_id = 7;
+		$username = "loremipsum";
 		$user = $this->Users_model->find($username);
 		$result = $this->Users_model->find_info($user_id);
 

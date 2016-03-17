@@ -1,4 +1,5 @@
 <?php
+
 	echo '<div class="container-fluid">';
 
 	echo '<div class="well col-xs-12">'."\n";
