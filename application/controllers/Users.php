@@ -59,7 +59,6 @@ class Users extends CI_Controller {
 		$data['page'] = "login";
 		$data['newline'] = "<br/>";
 
-
 		if(isset($_POST['btnLogin'])){
 			$username = $_POST["username"];
 			$password = $_POST["password"];
@@ -68,6 +67,7 @@ class Users extends CI_Controller {
 
 				if(verify($password, $user_info["password"], $user_info["salt"])){
 					session_start();
+					$_SESSION['id'] = $user_info['id'];
 					$_SESSION['username'] = $username;
 					$_SESSION['type'] = $user_info['type'];
 					header('Location: home');

@@ -32,4 +32,5 @@ class Users_model extends CI_Model {
 
 		return array("user" => $query1, "user_info"=>$query2, "validity" => $query3);
 	}
+
 }

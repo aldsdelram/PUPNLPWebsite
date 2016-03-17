@@ -4,7 +4,13 @@ $newline = '<br />';
 
 echo '<form method="post" enctype="multipart/form-data" onsubmit="" class="col-md-10 col-md-offset-1 col-xs-12">'."\n";
 
-echo '<h1> Add Tools </h1>';
+if($page == 'upload'){
+	echo '<h1> Add Tool </h1>';
+	}
+else if($page == 'update'){
+	echo '<h1> Update Tool </h1>';
+}
+
 
 echo "<label class='form-label'> Title </label>\n";
 	echo "<input class='form-control' name='title' type='text' placeholder='Title' value='".(empty($_POST["title"])?"":$_POST["title"])."'/>\n";
@@ -39,10 +45,5 @@ else if($page == 'update'){
 }
 
 echo '<button type="submit" class="btn btn-default" formaction="tools.php" name="btnCancel">Cancel</button> ';
-
-
-
-
-
-// 
+ 
 ?>

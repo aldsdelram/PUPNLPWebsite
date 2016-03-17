@@ -65,4 +65,6 @@ $route['tools/(:num)/edit'] = 'Tools/edit/$1';
 $route['user/(:num)/update'] = "Users/update/$1";
 $route['approve/(:num)/(:num)'] = 'Admin/approve/$1/$2';
 $route['approve_users'] = 'Admin/approve_users';
+$route['report'] = 'ReportGenerator/index';
+
  
