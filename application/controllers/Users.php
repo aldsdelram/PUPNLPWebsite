@@ -65,12 +65,16 @@ class Users extends CI_Controller {
 			$password = $_POST["password"];
 
 			if($user_info = $this->Users_model->find($username)) {
+				$user_data = $this->Users_model->find_info($user_info['id']);
 
 				if(verify($password, $user_info["password"], $user_info["salt"])){
-					session_start();
-					$_SESSION['id'] = $user_info['id'];
-					$_SESSION['username'] = $username;
-					$_SESSION['type'] = $user_info['type'];
+					$newdata = array(
+							'id' => $user_info['id'],
+							'username' => $username,
+							'type' => $user_info['type'],
+							'user_info' => $user_data
+						);
+					$this->session->set_userdata($newdata);
 					header('Location: home');
 				}
 				else echo "false";
@@ -137,6 +141,14 @@ class Users extends CI_Controller {
 
         $this->load->view('templates/header');
         $this->load->view('users/update', $data);
+        $this->load->view('templates/footer');
+	}
+
+	public function logout(){
+		$this->session->sess_destroy();
+
+		$this->load->view('templates/header');
+        echo 'Thank you for using our service';
         $this->load->view('templates/footer');
 	}
 }

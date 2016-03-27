@@ -13,7 +13,6 @@ class Tools extends CI_Controller {
 		$data['tools'] = $this->Tools_model->all();
 		$data['tools_version'] = $this->Tools_model->alltoolsver();
 
-		session_start();
 		$this->load->view('templates/header');
 		$this->load->view('tools/viewtools', $data);
 		$this->load->view('templates/footer');
@@ -25,7 +24,6 @@ class Tools extends CI_Controller {
 		$data["page"] = "update";
 		$data;
 		
-		session_start();
 
 
 		$data['tools'] = $this->Tools_model->find($id);
@@ -95,10 +93,9 @@ class Tools extends CI_Controller {
 		$data["page"] = "request";
 		$data;
 		
-		session_start();
 
 		$download["tool_id"] = $id;
-		$download["user_id"] = $_SESSION['id'];
+		$download["user_id"] = $this->session->userdata('id');
 		$download["created_at"] = $date = date('Y/m/d H:i:s');
 		$tools = $this->Tools_model->add_request($download);
 
@@ -108,12 +105,11 @@ class Tools extends CI_Controller {
 	}
 
 	public function download($id){
-		session_start();
 		$this->load->library('zip');
 
 
 		$download["tool_id"] = $id;
-		$download["downloaded_by"] = $_SESSION['id'];
+		$download["downloaded_by"] = $this->session->userdata('id');
 		$download["created_at"] = $date = date('Y/m/d H:i:s');
 		$this->Tools_model->add_download($download);
 

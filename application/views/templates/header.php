@@ -23,7 +23,6 @@
              </style>
 
 
-             
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/public/js/jquery.js"><\/script>')</script>
     <script src="/public/js/bootstrap.min.js"></script>
@@ -43,18 +42,32 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand maroon" href="welcome">PUP-CCIS NLP</a>
+          <a class="navbar-brand maroon" href="<?php echo base_url('welcome');?>">PUP-CCIS NLP</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="<?php echo base_url('home');?>">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="#contact">Researchers</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="register">Register</a></li>
-            <li class="active"><a href="login">Login</a></li>
+            <?php
+              if(empty($this->session->userdata('id'))){
+                echo'<li><a href="register">Register</a></li>
+                <li class="active"><a href="login">Login</a></li>';
+              }
+              else{
+                echo'<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'.
+                $this->session->userdata('user_info')['first_name'].' '.$this->session->userdata('user_info')['last_name'].'<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="'.base_url('logout').'">Logout</a></li>
+                </ul>
+              </li>';
+              }
+            ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

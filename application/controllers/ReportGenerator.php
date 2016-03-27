@@ -19,4 +19,9 @@ class ReportGenerator extends CI_Controller {
         $this->load->view('generator/index', $data);
         $this->load->view('templates/footer');
 	}
+
+	public function notif(){
+		echo "download:".$this->Generator_Model->notif_info_dl()['total'].'<br/>';
+		echo "signup:".$this->Generator_Model->notif_info_uv()['total'].'<br/>'; 
+	}
 }

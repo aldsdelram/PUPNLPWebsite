@@ -4,6 +4,7 @@ class Admin extends CI_Controller {
     {
             parent::__construct();
             $this->load->model('Admin_model');
+            $this->load->helper('url');
     }
 
 	public function approve_users(){
@@ -34,8 +35,9 @@ class Admin extends CI_Controller {
 			$this->db->delete('user_infos', array('user_id' => $id)); 
 			$this->db->delete('user_validity', array('id' => $id)); 
 		}
-		
-		header('Location: ../../approve_users');
+
+		redirect('approve_users', 'location', 301);
+		//header('Location:'.base_url('approve_users'));
 	}
 
 	public function requests(){
@@ -54,7 +56,7 @@ class Admin extends CI_Controller {
 		if($option == 1)
 		{
 			$data = array(
-               'accepted_by' => $option,
+               'accepted_by' => $this->session->userdata('id');
             );
 
 			$this->db->where('id', $id);
@@ -65,6 +67,7 @@ class Admin extends CI_Controller {
 			$this->db->delete('download_requests', array('id' => $id)); 
 		}
 		
-		header('Location: ../../requests');
-	}	
+		redirect('requests', 'location', 301);
+	}
+
 }

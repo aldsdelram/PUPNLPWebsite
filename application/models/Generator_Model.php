@@ -47,9 +47,21 @@ class Generator_Model extends CI_Model {
         return $query->row_array();
 	}
 
+	public function notif_info_dl(){
+		$query = $this->db
+			->select('count(id) as total')
+			->where(array('accepted_by'=>0))
+	        ->get('download_requests', 10);
 
+	    return $query->row_array();
+	}
 
+	public function notif_info_uv(){
+		$query = $this->db
+			->select('count(id) as total')
+			->where(array('validity'=>0))
+	        ->get('user_validity', 10);
 
-
-
+	    return $query->row_array();
+	}
 }

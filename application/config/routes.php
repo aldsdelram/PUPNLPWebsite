@@ -55,6 +55,7 @@ $route['tools'] = 'Tools/index';
 $route['tools/new'] = 'Tools/add';
 $route['register'] = 'Users/register';
 $route['login'] = 'Users/login';
+$route['logout'] = 'Users/logout';
 $route['user/(:num)/update'] = "Users/update/$1";
 $route['home'] = 'Users/home';
 $route['update'] = 'Users/update';
@@ -71,4 +72,5 @@ $route['approve_users'] = 'Admin/approve_users';
 $route['requests'] = 'Admin/requests';
 $route['approve_request/(:num)/(:num)'] = 'Admin/approve_request/$1/$2';
 $route['report'] = 'ReportGenerator/index';
+$route['notifications'] = 'ReportGenerator/notif';
  

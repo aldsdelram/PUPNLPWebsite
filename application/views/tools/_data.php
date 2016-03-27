@@ -27,8 +27,8 @@
 			echo"<h3>";
 			echo '<span class="tool_title">TITLE:</span>&nbsp;';
 			echo '<span id="tool_title"></span>';
-			if(!empty($_SESSION['type']))
-				if($_SESSION['type'] == "admin")
+			if(!empty($this->session->userdata('type')))
+				if($this->session->userdata('type') == "admin")
 					echo '<small id="updateLink"></small>';
 			echo "</h3>";
 
@@ -52,8 +52,8 @@
 			echo '<span id="tool_version"><span>';
 			echo "</h3>";
 			echo"<h3>";
-			if(!empty($_SESSION['type']))
-				if($_SESSION['type'] == "member")
+			if(!empty($this->session->userdata('type')))
+				if($this->session->userdata('type') == "member")
 					echo '<small id="downloadLink"></small>';
 			echo "</h3>";
 	echo '</div>'."\n";
@@ -78,12 +78,12 @@
 					$("#tool_version").text(data.version);		            
 		            $("#updateLink").html("<a href='tools/"+$id+"/edit'>UPDATE</a>");
 
-		            if(data['id'] == $id && data['user_id'] == <?php echo $_SESSION['id'] ?> && data['accepted_by'] == 0)
+		            if(data['id'] == $id && data['user_id'] == <?php echo $this->session->userdata('id') ?> && data['accepted_by'] == 0)
 		           	{
 		           		$("#downloadLink").html("Waiting for approval");
 		           	}
 		           	
-		           else if(data['id'] == $id && data['user_id'] == <?php echo $_SESSION['id'] ?>  && data['accepted_by'] > 0)
+		           else if(data['id'] == $id && data['user_id'] == <?php echo $this->session->userdata('id') ?>  && data['accepted_by'] > 0)
 					{
 						$("#downloadLink").html("<a href='tools/"+$id+"/download'>Download</a>");
 
