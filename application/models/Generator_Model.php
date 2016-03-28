@@ -64,4 +64,105 @@ class Generator_Model extends CI_Model {
 
 	    return $query->row_array();
 	}
+
+	public function weekly(){
+		$day = date('w');
+		$week_start = date('Y/m/d 00:00:00', strtotime('-'.$day.' days'));
+		$week_end = date('Y/m/d 23:59:59', strtotime('+'.(6-$day).' days'));
+
+		$query = $this->db
+			->select('tool_id, count(id) as total')
+			->where("created_at>=", $week_start)
+			->where("created_at<=", $week_end)
+			->group_by('tool_id')
+			->having('total>',0)
+			->order_by('total', 'desc')
+	        ->get('downloads', 5);
+
+       return $query;
+	}
+
+	public function top_5(){
+		$query = $this->db
+			->select('tool_id, count(id) as total')
+			->group_by('tool_id')
+			->order_by('total', 'desc')
+	        ->get('downloads', 5);
+
+       return $query;
+	}
+
+	public function all(){
+		$query = $this->db
+			->select('tool_id, count(id) as total')
+			->group_by('tool_id')
+			->order_by('total', 'desc')
+	        ->get('downloads');
+
+       return $query;
+	}
+
+
+	public function weekly_dl($id){
+		$day = date('w');
+		$week_start = date('Y/m/d 00:00:00', strtotime('-'.$day.' days'));
+		$week_end = date('Y/m/d 23:59:59', strtotime('+'.(6-$day).' days'));
+
+		
+
+		$query = $this->db
+			->select('tool_id, count(id) as total')
+			->where("created_at>=", $week_start)
+			->where("created_at<=", $week_end)
+			->where(array('tool_id'=>$id))
+	        ->get('downloads', 5);
+
+       return $query;	
+	}
+
+	public function weekly_vw($id){
+		$day = date('w');
+		$week_start = date('Y/m/d 00:00:00', strtotime('-'.$day.' days'));
+		$week_end = date('Y/m/d 23:59:59', strtotime('+'.(6-$day).' days'));
+
+		$query = $this->db
+			->select('tool_id, count(id) as total')
+			->where("created_at>=", $week_start)
+			->where("created_at<=", $week_end)
+			->where(array('tool_id'=>$id))
+	        ->get('tools_views', 5);
+
+       return $query;	
+	}
+
+
+	public function total_dl($id){
+
+		$query = $this->db
+			->select('tool_id, count(id) as total')
+			->where(array('tool_id'=>$id))
+	        ->get('downloads', 5);
+       return $query;	
+	}
+
+
+	public function total_vw($id){
+
+		$query = $this->db
+			->select('tool_id, count(id) as total')
+			->where(array('tool_id'=>$id))
+	        ->get('tools_views', 5);
+       return $query;
+	}
+
+	public function who_downloaded($id){
+		$query = $this->db
+			->distinct()
+			->select('downloaded_by as user_id')
+			->where(array('tool_id'=>$id))
+			->get('downloads');
+
+		return $query;
+	}
+
 }

@@ -71,6 +71,7 @@ $route['approve/(:num)/(:num)'] = 'Admin/approve/$1/$2';
 $route['approve_users'] = 'Admin/approve_users';
 $route['requests'] = 'Admin/requests';
 $route['approve_request/(:num)/(:num)'] = 'Admin/approve_request/$1/$2';
-$route['report'] = 'ReportGenerator/index';
+$route['report/(:num)'] = 'ReportGenerator/index/$1';
 $route['notifications'] = 'ReportGenerator/notif';
- 
+$route['summary'] = 'ReportGenerator/summary';
+$route['rpdf/(:num)'] = 'ReportGenerator/report/$1';
