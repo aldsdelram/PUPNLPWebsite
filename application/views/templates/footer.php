@@ -14,7 +14,7 @@
 	 		<div class="col-xs-12 col-md-2 col-md-offset-1">
 	 			<h4>Links </h4>
 	 			<ul>
-	 				<li><a href="#">HOME</a></li>
+	 				<li><a href="<?php echo base_url('home'); ?>">HOME</a></li>
 	 				<li><a href="#">ABOUT</a></li>
 	 				<li><a href="#">RESEARCHES</a></li>
 	 				<li><a href="#">CONTACT</a></li>

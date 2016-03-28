@@ -24,7 +24,7 @@ echo "<label class='form-label'> URL </label>\n";
 
 echo '<button type="submit" class="btn btn-primary" name="btnAdd">Add</button> ';
 
-echo '<button type="submit" class="btn btn-default" formaction="tools.php" name="btnCancel">Cancel</button> ';
+echo '<button type="submit" class="btn btn-default" formaction="'.base_url('publication').'" name="btnCancel">Cancel</button> ';
 
 
 

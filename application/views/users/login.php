@@ -17,7 +17,7 @@
 		echo $newline;
 
 		echo '<button type="submit" class="btn btn-primary" name="btnLogin">Login</button> ';
-		echo '<button type="submit" class="btn btn-default" formaction="index.php" name="btnCancel">Cancel</button>';
+		echo '<button type="submit" class="btn btn-default" formaction="'.base_url().'" name="btnCancel">Cancel</button>';
 
 
 	echo '</form>';

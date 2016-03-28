@@ -65,7 +65,7 @@
 	$(document).ready(function(){
 	    $("a#toollist").click(function(){
 	    	$id = $(this).attr('data-id');
-	    	$theURL = 'tools/'+$id+'/info';
+	    	$theURL = '<?php echo base_url() ?>tools/'+$id+'/info';
 	        $.ajax({url: $theURL, 
 	        	type: "GET",
 				dataType: "json",
@@ -76,7 +76,7 @@
 		            $("#tool_abstract").text(data.abstract);
 		            $("#tool_year").text(data.year);
 					$("#tool_version").text(data.version);		            
-		            $("#updateLink").html("<a href='tools/"+$id+"/edit'>UPDATE</a>");
+		            $("#updateLink").html("<a href='<?php echo base_url() ?>tools/"+$id+"/edit'>UPDATE</a>");
 
 		            if(data['id'] == $id && data['user_id'] == <?php echo $this->session->userdata('id') ?> && data['accepted_by'] == 0)
 		           	{
@@ -85,12 +85,12 @@
 		           	
 		           else if(data['id'] == $id && data['user_id'] == <?php echo $this->session->userdata('id') ?>  && data['accepted_by'] > 0)
 					{
-						$("#downloadLink").html("<a href='tools/"+$id+"/download'>Download</a>");
+						$("#downloadLink").html("<a href='<?php echo base_url() ?>tools/"+$id+"/download'>Download</a>");
 
 					}
 					else
 		            { 
-		            	$("#downloadLink").html("<a href='tools/"+$id+"/downloadrequest'>Request to Download</a>");
+		            	$("#downloadLink").html("<a href='<?php echo base_url() ?>tools/"+$id+"/downloadrequest'>Request to Download</a>");
 					}
 
 	        }});

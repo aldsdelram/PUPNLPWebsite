@@ -23,6 +23,10 @@ class Users_model extends CI_Model {
         return $query->row_array();
 	}
 
+	public function validity($user_id){
+        $query = $this->db->get_where('user_validity', array('user_id' => $user_id));
+        return $query->row_array();
+	}
 
 	public function update($updated_data, $user_id){
         $this->db->where('user_id', $user_id);

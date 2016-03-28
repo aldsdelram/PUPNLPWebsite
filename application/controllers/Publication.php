@@ -29,7 +29,8 @@ class Publication extends CI_Controller {
 
 
 	public function add(){
-
+		check_if_admin();
+		
 		$data;
 
 		if(isset($_POST['btnAdd']))

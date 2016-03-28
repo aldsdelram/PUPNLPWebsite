@@ -6,11 +6,11 @@ class ReportGenerator extends CI_Controller {
             $this->load->model('Generator_Model');
            $this->load->model('Tools_Model');
            $this->load->model('Users_Model');
-
     }
 
 	public function index($id){
 
+       check_if_admin();
 
 		$data['id'] = $id;
 
@@ -30,6 +30,8 @@ class ReportGenerator extends CI_Controller {
 	}
 
 	public function summary(){
+       check_if_admin();
+
 		$data['newline'] = '<br />';
 
 		$data["unum"] = $this->Generator_Model->users_count();
@@ -50,7 +52,7 @@ class ReportGenerator extends CI_Controller {
 	}
 
 	public function report($id){
-
+ 
 		$tool = $this->Tools_Model->find($id);
 
 

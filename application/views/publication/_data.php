@@ -56,7 +56,7 @@
 	$(document).ready(function(){
 	    $("a#publist").click(function(){
 	    	$id = $(this).attr('data-id');
-	    	$theURL = 'publication/'+$id+'/info';
+	    	$theURL = '<?php echo base_url() ?>publication/'+$id+'/info';
 	        $.ajax({url: $theURL, 
 	        	type: "GET",
 				dataType: "json",

@@ -1,5 +1,5 @@
 <?php
-class Tools_model extends CI_Model {
+class Tools_Model extends CI_Model {
      public function __construct()
     {
     	$this->load->database();

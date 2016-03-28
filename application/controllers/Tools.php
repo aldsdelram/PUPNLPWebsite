@@ -3,15 +3,17 @@ class Tools extends CI_Controller {
 
 	public function __construct()
     {
-            parent::__construct();
-            $this->load->model('Tools_model');
-    		$this->load->helper('tool_helper');
-    		$this->load->library('ftp');
+        parent::__construct();
+        $this->load->model('Tools_model');
+		$this->load->helper('tool_helper');
+		$this->load->library('ftp');
     }
 
 	public function index(){
 		$data['tools'] = $this->Tools_model->all();
 		$data['tools_version'] = $this->Tools_model->alltoolsver();
+
+		check_if_both();
 
 		$this->load->view('templates/header');
 		$this->load->view('tools/viewtools', $data);
@@ -23,8 +25,8 @@ class Tools extends CI_Controller {
 
 		$data["page"] = "update";
 		$data;
-		
-
+	
+		check_if_admin();
 
 		$data['tools'] = $this->Tools_model->find($id);
 		$data['tools_version'] = $this->Tools_model->find_version($id);
@@ -69,7 +71,7 @@ class Tools extends CI_Controller {
 
 			$this->ftp->close();
 
-			header('Location: edit');
+			redirect('edit', 'location', 301);
 			}
 
 
@@ -92,7 +94,8 @@ class Tools extends CI_Controller {
 	public function downloadrequest($id){
 		$data["page"] = "request";
 		$data;
-		
+
+		check_if_both();		
 
 		$download["tool_id"] = $id;
 		$download["user_id"] = $this->session->userdata('id');
@@ -107,6 +110,7 @@ class Tools extends CI_Controller {
 	public function download($id){
 		$this->load->library('zip');
 
+		check_if_both();
 
 		$download["tool_id"] = $id;
 		$download["downloaded_by"] = $this->session->userdata('id');
@@ -131,6 +135,8 @@ class Tools extends CI_Controller {
 		$data['version'] = $this->Tools_model->find_version($id);
 		$data['request'] = $this->Tools_model->find_request($id);
 
+		check_if_both();
+
 		header('Content-Type: application/json');
 		if(empty($data['request']))
 		{
@@ -147,6 +153,8 @@ class Tools extends CI_Controller {
 
 
 	public function add(){
+
+		check_if_admin();
 
 		$data["page"] = "upload";
 		$data;

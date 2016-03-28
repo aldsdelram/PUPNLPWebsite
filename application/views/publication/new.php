@@ -11,7 +11,7 @@
 		}
 		else{
 		    echo '<div id="error_explanation">';
-		    	echo '<h2>'.$error["count"].($error["count"]>1?" errors":" error").' prohibited this admin from being saved:</h2>';
+		    	echo '<h2>'.$error["count"].($error["count"]>1?" errors":" error").' prohibited this publication from being saved:</h2>';
 	      		echo"<ul>";
       				echo $error["message"];
 		      	echo "</ul>";

@@ -55,9 +55,9 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <?php
-              if(empty($this->session->userdata('id'))){
-                echo'<li><a href="register">Register</a></li>
-                <li class="active"><a href="login">Login</a></li>';
+              if(!$this->session->userdata('id')){
+                echo'<li><a href="'.base_url('register').'">Register</a></li>
+                <li class="active"><a href="'.base_url('login').'">Login</a></li>';
               }
               else{
                 echo'<li class="dropdown">

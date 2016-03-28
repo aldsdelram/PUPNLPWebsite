@@ -18,7 +18,8 @@
 			echo '<a href="tools" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #2780e3; border: 0; text-decoration: none;">TOOLS</a>
 				  <a href="requests" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #2780e3; border: 0; text-decoration: none;">DOWNLOAD APPROVAL</a>
 				  <a href="approve_users" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #2780e3; border: 0; text-decoration: none;">MEMBER APPROVAL</a>
-				  <a href="report" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #2780e3; border: 0; text-decoration: none;">DOWNLOAD REPORT</a>
+				  <a href="summary" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #2780e3; border: 0; text-decoration: none;">VIEW REPORT</a>
+				  <a href="publication/add" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #2780e3; border: 0; text-decoration: none;">ADD PUBLICATION</a>
 				  ';	
 		}
 		

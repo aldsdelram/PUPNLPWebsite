@@ -29,8 +29,8 @@
 					"</td>";
 
 					echo '<td width="220" height="60" style="vertical-align:middle">
-							<a href="approve/'. $row->id . '/1" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #2780e3; border: 0; text-decoration: none;">APPROVE</a>
-							<a href="approve/'. $row->id . '/0" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #800000; border: 0; text-decoration: none;">DENY</a>
+							<a href="'.base_url('approve/'. $row->id . '/1').'" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #2780e3; border: 0; text-decoration: none;">APPROVE</a>
+							<a href="'.base_url('approve/'. $row->id . '/0').'" style="color: #FFFFFF; padding: 12px 20px; margin: 10px 2px; background-color: #800000; border: 0; text-decoration: none;">DENY</a>
 						</td>';					
 			}
 		echo "</table>";

@@ -23,7 +23,7 @@
 
 // 
 
-	$name = '[REPORT]PUP_CCIS_NLP_'.$tool_name.'_'.$tool_year.'.pdf';
+$name = '[REPORT]PUP_CCIS_NLP_'.$tool_name.'_'.$tool_year.'.pdf';
 
 ?>
 <title>
@@ -45,5 +45,5 @@
 
 	$mpdf->WriteHTML(file_get_contents(base_url("rpdf/".$id)),2);
 	         
-	$mpdf->Output($name,'I');
+	$mpdf->Output($name,'D');
 ?>

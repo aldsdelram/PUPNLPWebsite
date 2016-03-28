@@ -42,7 +42,7 @@ else if($page == 'update'){
 	
 }
 
-echo '<button type="submit" class="btn btn-default" formaction="tools.php" name="btnCancel">Cancel</button> ';
+echo '<button type="submit" class="btn btn-default" formaction="'.base_url('tools').'" name="btnCancel">Cancel</button> ';
 
 
 

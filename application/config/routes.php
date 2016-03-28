@@ -56,6 +56,7 @@ $route['tools/new'] = 'Tools/add';
 $route['register'] = 'Users/register';
 $route['login'] = 'Users/login';
 $route['logout'] = 'Users/logout';
+$route['thank_you'] = 'Users/thank_you';
 $route['user/(:num)/update'] = "Users/update/$1";
 $route['home'] = 'Users/home';
 $route['update'] = 'Users/update';

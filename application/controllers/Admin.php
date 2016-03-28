@@ -11,6 +11,8 @@ class Admin extends CI_Controller {
 		$data['page'] = "approve_users";
 		$data['newline'] = "<br/>";
 
+		check_if_admin();
+
 		$data['result'] = $this->db->get_where('user_validity', array('validity' => 0));
 
         $this->load->view('templates/header');
@@ -19,6 +21,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function approve($id,$option){
+
+		check_if_admin();
 
 		if($option == 1)
 		{
@@ -43,7 +47,7 @@ class Admin extends CI_Controller {
 	public function requests(){
 		$data['page'] = "requests";
 		$data['newline'] = "<br/>";
-
+		check_if_admin();
 		$data['result'] = $this->db->get_where('download_requests', array('accepted_by' => 0));
 
         $this->load->view('templates/header');
@@ -52,11 +56,12 @@ class Admin extends CI_Controller {
 	}
 
 	public function approve_request($id,$option){
+		check_if_admin();
 
 		if($option == 1)
 		{
 			$data = array(
-               'accepted_by' => $this->session->userdata('id');
+               'accepted_by' => $this->session->userdata('id')
             );
 
 			$this->db->where('id', $id);

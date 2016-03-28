@@ -9,6 +9,9 @@ class Users extends CI_Controller {
 
 	public function register()
 	{
+
+		check_if_already_logged_in();
+
 		$data["page"] = "register";
 
 		if(isset($_POST['btnRegister']))
@@ -56,6 +59,8 @@ class Users extends CI_Controller {
 	}
 
 	public function login(){
+		check_if_already_logged_in();
+
 		$data['page'] = "login";
 		$data['newline'] = "<br/>";
 
@@ -68,10 +73,13 @@ class Users extends CI_Controller {
 				$user_data = $this->Users_model->find_info($user_info['id']);
 
 				if(verify($password, $user_info["password"], $user_info["salt"])){
+			    	$v = $this->Users_model->validity($user_info['id']);
+
 					$newdata = array(
 							'id' => $user_info['id'],
 							'username' => $username,
 							'type' => $user_info['type'],
+							'validity' => $v['validity'],
 							'user_info' => $user_data
 						);
 					$this->session->set_userdata($newdata);
@@ -88,6 +96,7 @@ class Users extends CI_Controller {
         $this->load->view('templates/footer');
 	}
 	public function home(){
+		check_if_both();
 		$data['page'] = "home";
 		$data['newline'] = "<br/>";
 
@@ -97,12 +106,13 @@ class Users extends CI_Controller {
 	}
 
 	public function update(){
+		check_if_both();
 		$data['page'] = "update";
 		$data['newline'] = "<br/>";
 
 		// temp id and username
-		$user_id = 7;
-		$username = "loremipsum";
+		$user_id = $this->session->userdata('id');
+		$username = $this->session->userdata('username');
 		$user = $this->Users_model->find($username);
 		$result = $this->Users_model->find_info($user_id);
 
@@ -147,8 +157,12 @@ class Users extends CI_Controller {
 	public function logout(){
 		$this->session->sess_destroy();
 
+		redirect('thank_you', 'Location, 301');
+	}
+
+	public function thank_you(){
 		$this->load->view('templates/header');
-        echo 'Thank you for using our service';
+        echo '<h1>Thank you for using our service</h1>';
         $this->load->view('templates/footer');
 	}
 }

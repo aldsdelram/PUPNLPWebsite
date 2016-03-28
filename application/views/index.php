@@ -25,9 +25,13 @@
                            <div class="row">
                                <div class="col-md-12 text-center">
                                  <?php 
-                                  if(!empty($this->session->userdata('id'))){
+                                  if($this->session->userdata('id')){
                                     echo '<h3> Hello '.$this->session->userdata('username');
-                                    echo '<br/><a href="'.base_url('home').'" class="btn btn-lg btn-light">Enter Here</a>';
+                                    if($this->session->validity == 1)
+                                      echo '<br/><a href="'.base_url('home').'" class="btn btn-lg btn-light">Enter Here</a>';
+                                    else{
+                                      echo "<br/> Sorry but you're still not validated. ";  
+                                    }
                                   }
                                   else{
                                     echo '<h3>Join Us / Already a Member?</h3>
