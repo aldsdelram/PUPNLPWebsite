@@ -75,3 +75,6 @@ $route['report/(:num)'] = 'ReportGenerator/index/$1';
 $route['notifications'] = 'ReportGenerator/notif';
 $route['summary'] = 'ReportGenerator/summary';
 $route['rpdf/(:num)'] = 'ReportGenerator/report/$1';
+$route['publication/new'] = 'Publication/add';
+$route['publication'] = 'Publication/index';
+$route['publication/(:num)/info'] = 'Publication/getinfo/$1';

@@ -50,6 +50,8 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="#contact">Researchers</a></li>
+            <li><a href="<?php echo base_url('/publication'); ?>">Publications</a></li>
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <?php
