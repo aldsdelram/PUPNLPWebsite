@@ -1,6 +1,5 @@
 <?php
 
-//	session_start ();
 	$newline = '<br />';
 
 	echo '<form method="post" onsubmit="" class="col-md-10 col-md-offset-1 col-xs-12">'."\n";

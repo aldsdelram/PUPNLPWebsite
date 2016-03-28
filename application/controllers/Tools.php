@@ -13,7 +13,6 @@ class Tools extends CI_Controller {
 		$data['tools'] = $this->Tools_model->all();
 		$data['tools_version'] = $this->Tools_model->alltoolsver();
 
-		session_start();
 		$this->load->view('templates/header');
 		$this->load->view('tools/viewtools', $data);
 		$this->load->view('templates/footer');
@@ -25,7 +24,6 @@ class Tools extends CI_Controller {
 		$data["page"] = "update";
 		$data;
 		
-		session_start();
 
 
 		$data['tools'] = $this->Tools_model->find($id);
@@ -72,7 +70,6 @@ class Tools extends CI_Controller {
 			$this->ftp->close();
 
 			header('Location: edit');
-
 			}
 
 
@@ -91,36 +88,63 @@ class Tools extends CI_Controller {
 		$this->load->view('templates/footer');
 	
 	}
-	// public function editversion($id){
-	// 	session_start();
 
-	// 	$data['tools_version'] = $this->Tools_model->find_version($id);
+	public function downloadrequest($id){
+		$data["page"] = "request";
+		$data;
+		
 
-	// 	$_POST['version'] = $data['tools_version']['version'];
+		$download["tool_id"] = $id;
+		$download["user_id"] = $this->session->userdata('id');
+		$download["created_at"] = $date = date('Y/m/d H:i:s');
+		$tools = $this->Tools_model->add_request($download);
 
-	// 	$this->load->view('templates/header');
-	// 	$this->load->view('tools/update', $data);
-	// 	$this->load->view('templates/footer');
-	// }
+		$this->load->view('templates/header');
+		$this->load->view('tools/download', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function download($id){
+		$this->load->library('zip');
+
+
+		$download["tool_id"] = $id;
+		$download["downloaded_by"] = $this->session->userdata('id');
+		$download["created_at"] = $date = date('Y/m/d H:i:s');
+		$this->Tools_model->add_download($download);
+
+		$data["page"] = "download";
+		$data['version'] = $this->Tools_model->find_version($id);
+		$path = $data['version']['file'];
+		$this->zip->read_file('../public/tools/'.$path); 
+		$this->zip->download('../public/tools/'.$data['version']['file']);
+		
+		// $this->load->view('templates/header');
+		// $this->load->view('tools/download', $data);
+		// $this->load->view('templates/footer');
+	}
+
+
 
 	public function getinfo($id){
 		$data['info'] = $this->Tools_model->find($id);
 		$data['version'] = $this->Tools_model->find_version($id);
+		$data['request'] = $this->Tools_model->find_request($id);
+
 		header('Content-Type: application/json');
+		if(empty($data['request']))
+		{
 		echo json_encode($data['info'] + $data['version']);
-		/*$this->load->view('templates/header');
-		$this->load->view('tools/viewtools', $data);
-		$this->load->view('templates/footer');*/
+		}
+		else
+		{
+		echo json_encode($data['info'] + $data['version'] + $data['request']);
+		}
+		$view["created_at"] = $date = date('Y/m/d H:i:s');
+		$view["tool_id"] = $id;
+		$tools = $this->Tools_model->add_view($view);
 	}
 
-	public function getversion($id){
-		// $data['info'] = $this->Tools_model->find_version($id);
-		// header('Content-Type: application/json');
-		// echo json_encode($data['version']);
-		/*$this->load->view('templates/header');
-		$this->load->view('tools/viewtools', $data);
-		$this->load->view('templates/footer');*/
-	}
 
 	public function add(){
 
@@ -140,9 +164,6 @@ class Tools extends CI_Controller {
 
 
 			$data["error"] = verify_data($input);
-
-			//echo $_FILES["fileToUpload"];
-
 
 			if($data["error"]["count"]==0){
 
@@ -167,10 +188,12 @@ class Tools extends CI_Controller {
 				$this->ftp->upload($_FILES['fileToUpload']['tmp_name'], '/public/tools/'.$_FILES['fileToUpload']['name'], 'auto');
 
 				$this->ftp->close(); 
-
 				header('Location: new');
+
 			}
+
 		}
+
 
 		$this->load->view('templates/header');
 		if(empty($data))

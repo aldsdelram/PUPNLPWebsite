@@ -2,9 +2,14 @@
 
 $newline = '<br />';
 
-echo '<form method="post" enctype="multipart/form-data" onsubmit="" class="col-md-10 col-md-offset-1 col-xs-12">'."\n";
+echo '<form method="post" onsubmit="" class="col-md-10 col-md-offset-1 col-xs-12" enctype="multipart/form-data">'."\n";
 
-echo '<h1> Add Tools </h1>';
+if($page == 'upload')
+	echo '<h1> Add Tool </h1>';
+else if($page == 'update'){
+	echo '<h1> Update Tool </h1>';
+}
+
 
 echo "<label class='form-label'> Title </label>\n";
 	echo "<input class='form-control' name='title' type='text' placeholder='Title' value='".(empty($_POST["title"])?"":$_POST["title"])."'/>\n";
@@ -12,7 +17,6 @@ echo "<label class='form-label'> Title </label>\n";
 
 echo "<label> Abstract </label>";
 	echo "<input class='form-control' name='abstract' type='text' value='".(empty($_POST["abstract"])?"":$_POST["abstract"])."'/>\n";
-	// echo '<textarea class="form-control" rows="5" name="abstract" placeholder="Place Abstract here..." value="'.(empty($_POST["abstract"])?"":$_POST["abstract"]).'" ></textarea>';
 	echo $newline;
 
 echo "<label class='form-label'> Author/s </label>\n";

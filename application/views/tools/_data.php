@@ -1,6 +1,5 @@
 <?php
 	echo '<h1>&nbsp&nbspView Tools </h1>'."\n";
-	
 	// echo "<table border=1> <tr><th>Name</th><th>Abstract</th><th>Author</th><th>Year</th></tr>";
 	// foreach($tools->result() as $row){
 	// 	echo "<tr><td>".$row->name ."</td><td>".$row->abstract."</td><td>".$row->authors."</td><td>".$row->year."</td></tr>";
@@ -28,8 +27,8 @@
 			echo"<h3>";
 			echo '<span class="tool_title">TITLE:</span>&nbsp;';
 			echo '<span id="tool_title"></span>';
-			if(!empty($_SESSION['type']))
-				if($_SESSION['type'] == "admin")
+			if(!empty($this->session->userdata('type')))
+				if($this->session->userdata('type') == "admin")
 					echo '<small id="updateLink"></small>';
 			echo "</h3>";
 
@@ -52,8 +51,11 @@
 			echo '<span class="tool_title">VERSION:</span>&nbsp;';
 			echo '<span id="tool_version"><span>';
 			echo "</h3>";
-
-
+			echo"<h3>";
+			if(!empty($this->session->userdata('type')))
+				if($this->session->userdata('type') == "member")
+					echo '<small id="downloadLink"></small>';
+			echo "</h3>";
 	echo '</div>'."\n";
 
 ?>
@@ -73,9 +75,24 @@
 		            $("#tool_author").text(data.authors);
 		            $("#tool_abstract").text(data.abstract);
 		            $("#tool_year").text(data.year);
-
-		            $("#tool_version").text(data.version);		            
+					$("#tool_version").text(data.version);		            
 		            $("#updateLink").html("<a href='tools/"+$id+"/edit'>UPDATE</a>");
+
+		            if(data['id'] == $id && data['user_id'] == <?php echo $this->session->userdata('id') ?> && data['accepted_by'] == 0)
+		           	{
+		           		$("#downloadLink").html("Waiting for approval");
+		           	}
+		           	
+		           else if(data['id'] == $id && data['user_id'] == <?php echo $this->session->userdata('id') ?>  && data['accepted_by'] > 0)
+					{
+						$("#downloadLink").html("<a href='tools/"+$id+"/download'>Download</a>");
+
+					}
+					else
+		            { 
+		            	$("#downloadLink").html("<a href='tools/"+$id+"/downloadrequest'>Request to Download</a>");
+					}
+
 	        }});
 	    });
 	});

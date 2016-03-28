@@ -24,9 +24,17 @@
                        <div class="container-fluid">
                            <div class="row">
                                <div class="col-md-12 text-center">
-                                   <h3>Join Us / Already a Member?</h3>
+                                 <?php 
+                                  if(!empty($this->session->userdata('id'))){
+                                    echo '<h3> Hello '.$this->session->userdata('username');
+                                    echo '<br/><a href="'.base_url('home').'" class="btn btn-lg btn-light">Enter Here</a>';
+                                  }
+                                  else{
+                                    echo '<h3>Join Us / Already a Member?</h3>
                                    <a href="register" class="btn btn-lg btn-light">Register Here</a>
-                                   <a href="login" class="btn btn-lg btn-dark">Login</a>
+                                   <a href="login" class="btn btn-lg btn-dark">Login</a>';
+                                  }
+                                 ?>
                                </div>
                            </div>
                        </div>
