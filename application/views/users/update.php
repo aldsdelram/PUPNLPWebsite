@@ -17,5 +17,7 @@
 	}
 
 	include('_form.php');
+
 	echo "</div>";
+	
 ?>

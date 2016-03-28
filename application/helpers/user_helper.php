@@ -69,5 +69,72 @@
 		return $error;
 	}
 
-	require("security.php");	
+	function verify_password($data){
+		$message = "";
+
+		$error["count"] = 0;
+
+		$users = get_instance();
+
+		if(strlen($data["password"]) < 8){
+			$error["count"]++;
+			$message.="<li>Password must atleast 8 characters</li>";
+		}
+
+		$error["message"] = $message;
+
+		return $error;
+	}
+
+	function verify_update($data){
+		$message = "";
+
+		$error["count"] = 0;
+
+		$users = get_instance();
+
+		if(empty($data["firstname"])){
+			$error["count"]++;
+			$message.="<li>First name is a must</li>";
+		}
+		if(empty($data["lastname"])){
+			$error["count"]++;
+			$message.="<li>Last name is a must</li>";
+		}
+		
+		if(empty($data["email"])){
+			$error["count"]++;
+			$message.="<li>Email Address is a must</li>";
+		}
+
+		if($users->Users_model->find_email($data["email"])){
+			$user_info = $users->Users_model->find_email($data["email"]);
+			if($user_info['user_id'] != $data['id'])
+			{
+				$error["count"]++;
+				$message.="<li>Email Address is already registered</li>";	
+			}
+		}
+
+		if(empty($data["gender"])){
+			$message.="<li>Gender is a must</li>";
+			$error["count"]++;
+		}
+		
+		if(empty($data["occupation"])){
+			$error["count"]++;
+			$message.="<li>Occupation is a must</li>";
+		}
+
+		if(empty($data["otherinfo"])){
+			$error["count"]++;
+			$message.="<li>Other Information is a must</li>";
+		}
+
+		$error["message"] = $message;
+
+		return $error;
+	}
+
+	require("security.php");
 ?>

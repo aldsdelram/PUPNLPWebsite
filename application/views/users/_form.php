@@ -7,16 +7,18 @@
 	echo '<h1>'.($page=='register'?'Registration':'Update Information').'</h1>'."\n";
 
 	echo "<label class='form-label'> Username </label>\n";
-	echo "<input class='form-control' name='username' type='text' placeholder='username' value='".(empty($_POST["username"])?"":$_POST["username"])."'/>\n";
+	echo "<input class='form-control' name='username' type='text' placeholder='username' value='".(empty($_POST["username"])?"":$_POST["username"])."' ".($page=='register'?'':'disabled')." />\n";
 	echo $newline;
-
-	echo "<label> Password </label>";
+	
+	echo "<label>".($page=='register'?'':'Change')." Password </label>";
 	echo "<input class='form-control' name='password' type='password' />";
 	echo $newline;
 
-	echo "<label> Confirm Password </label>";
-	echo "<input class='form-control' name='password_confirm' type='password' />";
-	echo $newline;
+	if($page == 'register'){
+		echo "<label> Confirm Password </label>";
+		echo "<input class='form-control' name='password_confirm' type='password' />";
+		echo $newline;
+	}
 
 	echo "<label> First Name </label>";
 	echo "<input class='form-control' name='firstname' type='text' placeholder='Juan' value='".(empty($_POST["firstname"])?"":$_POST["firstname"])."'/>";
@@ -37,8 +39,8 @@
 
 	echo "<label> Gender </label>";
 	echo '<div>';
-	echo '<input type="radio" name="gender" value="male"'.(empty($_POST["gender"])?"":$_POST["gender"] == "male"?"checked":"").'> Male<br>';
-  	echo '<input type="radio" name="gender" value="female"'.(empty($_POST["gender"])?"":$_POST["gender"] == "female"?"checked":"").'> Female';
+	echo '<input type="radio" name="gender" value="male" '.(empty($_POST["gender"])?"":$_POST["gender"] == "male"?"checked":"").'> Male<br>';
+  	echo '<input type="radio" name="gender" value="female" '.(empty($_POST["gender"])?"":$_POST["gender"] == "female"?"checked":"").'> Female';
   	echo "</div>";
 	echo $newline;
 
@@ -58,9 +60,11 @@
 		echo '<button type="submit" class="btn btn-primary" name="btnRegister">Register</button> ';
 	}
 	else if($page == 'update')
-		echo 'update';
+		echo '<button type="submit" class="btn btn-primary" name="btnUpdate">Update</button> ';
 	echo '<button type="submit" class="btn btn-default" formaction="index.php" name="btnCancel">Cancel</button>';
 	echo $newline;
 
 	echo "</form>";
+	echo "<div class='clearfix'></div>";
+
 ?>

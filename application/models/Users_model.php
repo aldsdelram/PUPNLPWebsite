@@ -29,6 +29,11 @@ class Users_model extends CI_Model {
         $this->db->update('user_infos', $updated_data);
 	} 
 
+	public function update_password($updated_data, $user_id){
+        $this->db->where('id', $user_id);
+        $this->db->update('users', $updated_data);
+	}
+	 
 	public function insert($data, $other_info){
 		$query1 = $this->db->insert('users', $data);
 		$other_info["user_id"] = $this->db->insert_id();

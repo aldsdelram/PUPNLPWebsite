@@ -64,7 +64,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'.
                 $this->session->userdata('user_info')['first_name'].' '.$this->session->userdata('user_info')['last_name'].'<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Another action</a></li>
+                  <li><a href="'.base_url('users/update').'">Update Info</a></li>
                   <li><a href="'.base_url('logout').'">Logout</a></li>
                 </ul>
               </li>';
